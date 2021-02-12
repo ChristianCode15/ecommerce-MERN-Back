@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/handler-error');
 
 app.use(cors());
 app.options('*', cors());
@@ -12,18 +14,20 @@ app.options('*', cors());
 //Middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(authJwt());
+app.use(errorHandler);
 
 const api = process.env.API_URL;
 //Routers
 const productsRouter = require('./routers/products');
 const categoriesRouter = require('./routers/categories');
 //const ordersRoutes = require('./routers');
-//const usersRoutes = require('./routers');
+const usersRoutes = require('./routers/users');
 
 app.use(`${api}/products`, productsRouter);
 app.use( `${api}/categories`, categoriesRouter);
 //app.use( `${api}/orders`, ordersRoutes);
-//app.use( `${api}/users`, usersRoutes);
+app.use( `${api}/users`, usersRoutes);
 
 mongoose.connect(process.env.CONECCTION_STRING, {
     useNewUrlParser: true,
