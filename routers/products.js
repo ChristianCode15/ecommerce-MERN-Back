@@ -28,7 +28,7 @@ router.get(`/:id`, async (req, res) => {
     }
 
     res.send(product);
-})
+});
 
 //Agregar producto
 router.post(`/`, async (req, res) => {
@@ -58,7 +58,7 @@ router.post(`/`, async (req, res) => {
 
     res.send(product);
 
-})
+});
 
 //Editar producto
 router.put('/:id', async (req, res) => {
@@ -91,7 +91,7 @@ router.put('/:id', async (req, res) => {
     }
 
     res.send(product);
-})
+});
 
 //Borrar producto
 router.delete('/:id', (req, res) => {
@@ -106,7 +106,7 @@ router.delete('/:id', (req, res) => {
     .catch( err => {
         return res.status(400).json({success: false, error: err});
     })
-})
+});
 
 //Contador de productos existentes
 router.get(`/get/count`, async (req, res) => {
@@ -119,7 +119,7 @@ router.get(`/get/count`, async (req, res) => {
     res.send({
         productCount: productCount,
     });
-})
+});
 
 //Producto destacado(featured)
 router.get(`/get/featured/:count`, async (req, res) => {
@@ -131,6 +131,6 @@ router.get(`/get/featured/:count`, async (req, res) => {
     }
 
     res.send(products);
-})
+});
 
 module.exports = router;

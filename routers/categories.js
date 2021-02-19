@@ -11,7 +11,7 @@ router.get(`/`, async (req, res) => {
         res.status(500).json({success: false})
     }
     res.status(200).send(categoryList);
-})
+});
 
 router.get('/:id', async (req,res) => {
     const category = await Category.findById(req.params.id);
@@ -19,7 +19,7 @@ router.get('/:id', async (req,res) => {
         return res.status(500).json({status: false, message: 'No se encontro categoria con ese Id'})
     }
     res.status(200).send(category);
-})
+});
 
 router.post(`/`, async (req, res) => {
     let category = new Category({
@@ -35,7 +35,7 @@ router.post(`/`, async (req, res) => {
     }
 
     res.send(category);
-})
+});
 
 router.put('/:id', async (req, res) => {
     const category = await Category.findByIdAndUpdate(
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
     }
 
     res.status(200).json(category);
-})
+});
 
 router.delete('/:id', (req, res) => {
     Category.findByIdAndDelete(req.params.id)
@@ -67,7 +67,7 @@ router.delete('/:id', (req, res) => {
     .catch( err => {
         return res.status(400).json({success: false, error: err});
     })
-})
+});
 
 
 module.exports = router;

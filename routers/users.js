@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.status(200).send(user);
-})
+});
 
 router.post(`/`, async (req, res) => {
     let user = new User({
@@ -93,7 +93,7 @@ router.post('/register', async (req, res) => {
     }
 
     res.send(user);
-})
+});
 
 router.delete('/:id', (req, res) => {
     User.findByIdAndDelete(req.params.id)
@@ -107,7 +107,7 @@ router.delete('/:id', (req, res) => {
     .catch( err => {
         return res.status(400).json({success: false, error: err});
     })
-})
+});
 
 router.get(`/get/count`, async (req, res) => {
     const userCount = await User.countDocuments((count) => count);
@@ -119,7 +119,7 @@ router.get(`/get/count`, async (req, res) => {
     res.send({
         userCount: userCount,
     });
-})
+});
 
 
 module.exports = router;
