@@ -15,6 +15,7 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use(authJwt());
+app.use('/public/images', express.static(__dirname + '/public/images'));//Lo uso para poder acceder a mi carpeta publica
 app.use(errorHandler);
 
 const api = process.env.API_URL;
