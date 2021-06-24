@@ -46,3 +46,8 @@ app.listen( 3000, () => {
     console.log(api);
     console.log('Estoy usando el puerto 3000');
 });
+
+const server = app.listen(process.env.PORT || 3000, function() {
+    const port = server.address().port;
+    console.log('Funcionando Exp. en el puerto' + port);
+})
