@@ -38,7 +38,7 @@ const productSchema = mongoose.Schema({
         min: 0,
         max: 250,
     },
-    raiting: {
+    rating: {
         type: Number,
         default: 0,
     },

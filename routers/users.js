@@ -17,6 +17,7 @@ router.get(`/`, async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+    
     const user = await User.findById(req.params.id).select('-passwordHash');
 
     if(!user) {
@@ -57,7 +58,7 @@ router.post('/login', async (req, res) => {
         return  res.status(400).send('Usuario no encontrado');
     }
 
-    if(user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+    if(user && bcrypt.compareSync(req.body.passwordHash, user.passwordHash)) {
         const token = jwt.sign(
         {    
             userId: user.id,
@@ -77,7 +78,7 @@ router.post('/register', async (req, res) => {
     let user = new User({
         name: req.body.name,
         email: req.body.email,
-        passwordHash: req.body.passwordHash,
+        passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
         phone: req.body.phone,
         isAdmin: req.body.isAdmin,
         street: req.body.street,
